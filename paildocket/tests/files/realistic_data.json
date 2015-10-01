@@ -1,0 +1,66 @@
+{
+"checklists": [
+{
+"description": "Alice likes to keep her bucket list here",
+"editor_usernames": [
+"alice"
+],
+"items": [
+{
+"description": "I've always been afraid of heights, time to stop caring about that.",
+"title": "Go skydiving"
+}
+],
+"title": "Alice's private checklist",
+"viewer_usernames": []
+},
+{
+"description": "Bob keeps track of the books he wants to read",
+"editor_usernames": [
+"bob"
+],
+"items": [
+{
+"description": "by Douglas Hofstadter",
+"title": "G\u00f6del, Escher, Bach"
+}
+],
+"title": "Bob's private list - books to read",
+"viewer_usernames": []
+},
+{
+"description": "Alice suggests movies to Charles and Bob",
+"editor_usernames": [
+"alice"
+],
+"items": [
+{
+"description": "I can't believe you guys haven't seen this",
+"title": "Back to the Future"
+}
+],
+"title": "Alice's shared movie recommendations",
+"viewer_usernames": [
+"bob",
+"charles"
+]
+}
+],
+"users": [
+{
+"email": "alice@example.com",
+"password": "alice",
+"username": "alice"
+},
+{
+"email": "bob@example.com",
+"password": "bob",
+"username": "bob"
+},
+{
+"email": "charles@example.com",
+"password": "charles",
+"username": "charles"
+}
+]
+}

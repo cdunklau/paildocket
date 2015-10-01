@@ -1,0 +1,13 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+
+{% for value, value_repr, value_type in value_repr_types %}
+<h1>Test Value: instance of {{ value_type }}</h1>
+
+<p>Value: {{ value }}</p>
+
+<p>Value repr: {{ value_repr }}</p>
+{% endfor %}
+
+{% endblock %}

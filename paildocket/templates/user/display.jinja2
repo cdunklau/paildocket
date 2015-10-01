@@ -1,0 +1,13 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+
+<h1>{{ 
+    gettext("{username}'s profile").format(username=user.username) 
+}}</h1>
+
+<ul>
+    <li>{{ gettext('Email address') }}: {{ user.email }}</li>
+</ul>
+
+{% endblock %}

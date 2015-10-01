@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale_name }}">
+<head>
+    {% block head %}
+    <link rel="stylesheet"
+          href="{{ request.static_url('paildocket:static/css/style.css') }}"/>
+    <title>{% block title %}{% endblock %} - SITE NAME</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="header">
+        {% block header %}
+
+        {% if request.user %}
+        <p>{{ 
+                gettext(
+                    'Hello, {username}!'
+                ).format(username=request.user.username)
+        }}</p>
+        <ul>
+            <li><a href="{{ request.root|resource_url('list') }}">{{
+                gettext('My Lists') }}</a></li>
+            <li><a href="{{ request.root|resource_url('user') }}">{{
+                gettext('My Profile') }}</a></li>
+            <li><a href="{{ request.root|resource_url('logout') }}">{{
+                gettext('Log Out') }}</a></li>
+        </ul>
+        {% else %}
+        <ul>
+            <li><a href="{{ request.root|resource_url('login') }}">{{
+                gettext('Log In') }}</a></li>
+            <li><a href="{{ request.root|resource_url('register') }}">{{
+                gettext('Register') }}</a></li>
+        </ul>
+        {% endif %}
+
+        {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

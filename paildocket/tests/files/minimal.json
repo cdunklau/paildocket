@@ -1,0 +1,25 @@
+{
+"checklists": [
+{
+"description": "",
+"editor_usernames": [
+"alice"
+],
+"items": [
+{
+"description": "",
+"title": "Alice's item"
+}
+],
+"title": "Alice's checklist",
+"viewer_usernames": []
+}
+],
+"users": [
+{
+"email": "alice@example.com",
+"password": "alice",
+"username": "alice"
+}
+]
+}

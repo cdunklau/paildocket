@@ -1,0 +1,13 @@
+{% extends "base.jinja2" %}
+{% block content %}
+
+<h1>Checklists:</h1>
+
+{% for checklist in checklists %}
+<h1><a href="{{ 'admin.checklist_detail'|route_url(checklist_id=checklist.id) }}">
+    {{ checklist.title }}</a></h1>
+    
+<p>{{ checklist.description }}</p>
+{% endfor %}
+
+{% endblock %}

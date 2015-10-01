@@ -1,0 +1,29 @@
+{% extends "base.jinja2" %}
+{% block content %}
+
+<h1>{{ gettext('My Lists') }}</h1>
+
+{% if editable or viewable %}
+
+<ul>
+    {% for checklist in editable %}
+    <li><a href="{{ context|resource_url(checklist.id) }}">{{
+        checklist.title
+    }}</a> - <a href="{{ context|resource_url(checklist.id, 'edit') }}">{{
+        gettext('Edit')
+    }}</li>
+    {% endfor %}
+    {% for checklist in viewable %}
+    <li><a href="{{ context|resource_url(checklist.id) }}">{{
+        checklist.title
+    }}</a></li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<h1><em>{{ gettext('No lists found') }}</em></h1>
+
+{% endif %}
+
+{% endblock %}

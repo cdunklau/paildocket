@@ -1,0 +1,99 @@
+#
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) 2015 Colin Dunklau
+# This file is distributed under the same license as the Pail Docket package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Pail Docket UNKNOWN\n"
+"Report-Msgid-Bugs-To: colin.dunklau@gmail.com\n"
+"POT-Creation-Date: 2015-10-01 15:15-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Generated-By: Lingua 3.11\n"
+
+#: ./paildocket/templates/checklist/index.jinja2:13
+msgid "Edit"
+msgstr ""
+
+#: ./paildocket/schemas.py:68
+msgid "Email Address"
+msgstr ""
+
+#: ./paildocket/templates/user/display.jinja2:10
+msgid "Email address"
+msgstr ""
+
+#: ./paildocket/templates/base.jinja2:16
+#, python-format
+msgid "Hello, {username}!"
+msgstr ""
+
+#: ./paildocket/schemas.py:10
+msgid "Invalid character(s)"
+msgstr ""
+
+#: ./paildocket/templates/base.jinja2:31 ./paildocket/views/root.py:66
+msgid "Log In"
+msgstr ""
+
+#: ./paildocket/templates/base.jinja2:26
+msgid "Log Out"
+msgstr ""
+
+#: ./paildocket/schemas.py:35
+msgid "Must only contain letters, numbers, dashes, and/or underscores"
+msgstr ""
+
+#: ./paildocket/templates/base.jinja2:22
+#: ./paildocket/templates/checklist/index.jinja2:4
+msgid "My Lists"
+msgstr ""
+
+#: ./paildocket/templates/base.jinja2:24
+msgid "My Profile"
+msgstr ""
+
+#: ./paildocket/templates/checklist/index.jinja2:25
+msgid "No lists found"
+msgstr ""
+
+#: ./paildocket/schemas.py:53 ./paildocket/schemas.py:74
+msgid "Password"
+msgstr ""
+
+#: ./paildocket/templates/base.jinja2:33 ./paildocket/views/root.py:144
+msgid "Register"
+msgstr ""
+
+#: ./paildocket/views/root.py:173
+msgid "The username or email address is already registered"
+msgstr ""
+
+#: ./paildocket/templates/index.jinja2:6
+#, python-format
+msgid "This project is called {project}"
+msgstr ""
+
+#: ./paildocket/views/root.py:102
+msgid "Unknown username/email or incorrect password"
+msgstr ""
+
+#: ./paildocket/schemas.py:63
+msgid "Username"
+msgstr ""
+
+#: ./paildocket/schemas.py:47
+msgid "Username or Email Address"
+msgstr ""
+
+#: ./paildocket/templates/user/display.jinja2:6
+#, python-format
+msgid "{username}'s profile"
+msgstr ""

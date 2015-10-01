@@ -1,0 +1,21 @@
+# python stuff
+*.pyc
+*.pyo
+__pycache__/
+_trial_temp/
+.tox/
+*.egg-info
+*.egg
+.cache/
+
+# virtualenv
+venv/
+
+# lockfiles
+*~lock*
+.*.swp
+*.old
+
+# sqlite3 db
+db.sqlite3
+

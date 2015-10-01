@@ -1,0 +1,6 @@
+pyramid_debugtoolbar
+webtest
+lingua
+babel
+pytest
+pytest-cov

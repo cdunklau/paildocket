@@ -1,0 +1,10 @@
+include *.txt *.ini *.cfg *.rst
+recursive-include paildocket *.py
+# test data
+recursive-include paildocket/tests *.json *.ini *.txt
+# static assets
+recursive-include paildocket/static *.ico *.png *.css *.gif *.jpg *.js
+# templates
+recursive-include paildocket/templates *.jinja2
+# i18n
+recursive-include paildocket/locale *.conf *.pot *.po *.mo
