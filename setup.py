@@ -48,6 +48,7 @@ setup(
     main = paildocket.wsgi:main
     [console_scripts]
     initialize_database = paildocket.management:initialize_database
+    add_user = paildocket.management:add_user
     manage_fixtures = paildocket.management:manage_fixtures
     """,
 )

@@ -3,14 +3,17 @@ import sys
 import logging
 import argparse
 import subprocess
+import getpass
 
 from sqlalchemy import engine_from_config
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine.url import make_url
 from pyramid.paster import get_appsettings, setup_logging
 from zope.sqlalchemy import mark_changed
 import transaction
 
-from paildocket.models import Base
+from paildocket.models import Base, User
+from paildocket.security import create_password_context
 from paildocket.tests import fixtures
 
 
@@ -72,6 +75,36 @@ class InitializeDatabaseCommand(BaseCommand):
         Base.metadata.create_all(engine)
 
 initialize_database = InitializeDatabaseCommand()
+
+
+class AddUserCommand(BaseCommand):
+    # TODO eventually this should add an admin user instead
+    name = 'add_user'
+
+    def configure_parser(self):
+        pass
+
+    def run(self, args):
+        settings = get_appsettings(self.config_uri)
+        engine = engine_from_config(settings, 'sqlalchemy.')
+        session = sessionmaker(bind=engine)()
+
+        bcrypt_rounds = settings.get('paildocket.password.bcrypt_rounds')
+        pwctx = create_password_context(bcrypt__default_rounds=bcrypt_rounds)
+
+        username = input('Enter username: ')
+        email = input('Enter email: ')
+        password = getpass.getpass()
+        session.add(User(
+            username=username,
+            email=email,
+            password_hash=pwctx.encrypt(password),
+        ))
+        logger.info('Creating user {0} with email {1}'.format(username, email))
+        session.commit()
+
+add_user = AddUserCommand()
+
 
 
 # This is broken, needs reimplementation.
