@@ -1,10 +1,11 @@
-# This is broken, needs reimplementation
 import os
 import sys
 import logging
 import argparse
+import subprocess
 
 from sqlalchemy import engine_from_config
+from sqlalchemy.engine.url import make_url
 from pyramid.paster import get_appsettings, setup_logging
 from zope.sqlalchemy import mark_changed
 import transaction
@@ -59,6 +60,13 @@ class InitializeDatabaseCommand(BaseCommand):
 
     def run(self, args):
         settings = get_appsettings(self.config_uri)
+        db_url = settings['sqlalchemy.url']
+        db_name = make_url(db_url).translate_connect_args()['database']
+        logger.info('Installing required database extensions')
+        subprocess.check_call([
+            'psql', '-d', db_name,
+            '-c', 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
+        ])
         engine = engine_from_config(settings, 'sqlalchemy.', echo=args.verbose)
         logger.info('Creating all tables')
         Base.metadata.create_all(engine)
@@ -66,6 +74,9 @@ class InitializeDatabaseCommand(BaseCommand):
 initialize_database = InitializeDatabaseCommand()
 
 
+# This is broken, needs reimplementation.
+# This shouldn't be here anyway since it touches the test code, and fixtures
+# aren't necessary outside of testing.
 class ManageFixturesCommand(BaseCommand):
     name = 'manage_fixtures'
 

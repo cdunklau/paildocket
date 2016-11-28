@@ -16,7 +16,7 @@ class TestAuthenticationPolicy(object):
         request.db_session = db_session
         return request
 
-    @pytest.skip('not done yet')
+    @pytest.mark.skip('not done yet')
     def test_remember_creates_new_ticket(self, db_session):
         policy = self._make_policy()
         request = self.make_request(db_session)

@@ -30,6 +30,10 @@ def fresh_database(request):
     subprocess.call(['dropdb', db_name])
 
     subprocess.check_call(['createdb', db_name])
+    subprocess.check_call([
+        'psql', '-d', db_name,
+        '-c', 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
+    ])
 
     engine = create_engine(db_url)
     Base.metadata.create_all(engine)
