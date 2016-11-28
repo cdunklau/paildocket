@@ -56,7 +56,7 @@ class BaseCommand(object):
 
 
 class InitializeDatabaseCommand(BaseCommand):
-    name = 'initialize_database'
+    name = 'paildocket-initdb'
 
     def configure_parser(self):
         pass  # no config needed
@@ -79,7 +79,7 @@ initialize_database = InitializeDatabaseCommand()
 
 class AddUserCommand(BaseCommand):
     # TODO eventually this should add an admin user instead
-    name = 'add_user'
+    name = 'paildocket-adduser'
 
     def configure_parser(self):
         pass
@@ -111,7 +111,7 @@ add_user = AddUserCommand()
 # This shouldn't be here anyway since it touches the test code, and fixtures
 # aren't necessary outside of testing.
 class ManageFixturesCommand(BaseCommand):
-    name = 'manage_fixtures'
+    name = 'paildocket-fixtures'
 
     def configure_parser(self):
         subparsers = self.parser.add_subparsers(
