@@ -18,6 +18,9 @@
         checklist.title
     }}</a></li>
     {% endfor %}
+    <li><a href="{{ context|resource_url('create') }}">{{
+        gettext('Create New Checklist')
+    }}</a></li>
 </ul>
 
 {% else %}

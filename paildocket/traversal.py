@@ -51,8 +51,7 @@ class ChecklistResource(object):
 
     def __init__(self, parent, checklist_id):
         self.__parent__ = parent
-        self.checklist_id = checklist_id
-        self.__name__ = 'checklist.{0}'.format(checklist_id)
+        self.__name__ = self.checklist_id = checklist_id
         self.request = find_root(self).request
 
     def __acl__(self):
@@ -103,8 +102,7 @@ class UserResource(object):
 
     def __init__(self, parent, user_id):
         self.__parent__ = parent
-        self.user_id = user_id
-        self.__name__ = 'user.{0}'.format(user_id)
+        self.__name__ = self.user_id = user_id
         self.request = find_root(self).request
 
     def __acl__(self):

@@ -75,3 +75,16 @@ class RegisterUserSchema(colander.MappingSchema):
         validator=password_policy,
         widget=deform.widget.CheckedPasswordWidget()
     )
+
+
+class ChecklistSchema(colander.MappingSchema):
+    title = colander.SchemaNode(
+        colander.String(),
+        title=_('Title'),
+        validator=colander.Length(0, 500)
+    )
+    description = colander.SchemaNode(
+        colander.String(),
+        title=_('Description'),
+        validator=colander.Length(0, 10000),
+    )

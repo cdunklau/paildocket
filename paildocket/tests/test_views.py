@@ -160,3 +160,6 @@ def test_user_registration(testapp):
     assert user.username == 'foobar'
     assert user.email == 'foobar@example.com'
     assert password_context.verify('foobarfoobar', user.password_hash)
+
+
+# TODO Add tests for other views
