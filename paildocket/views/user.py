@@ -8,14 +8,14 @@ from pyramid.httpexceptions import HTTPFound
 from paildocket.i18n import _
 from paildocket.models import User
 from paildocket.security import ViewPermission
-from paildocket.traversal import UsersResource, UserResource
+from paildocket.traversal import UserCollectionResource, UserResource
 
 
 logger = logging.getLogger(__name__)
 
 
-@view_defaults(context=UsersResource, permission=ViewPermission)
-class UsersViews(object):
+@view_defaults(context=UserCollectionResource, permission=ViewPermission)
+class UserCollectionViews(object):
     """
     Display and management of the currently logged-on user.
     """

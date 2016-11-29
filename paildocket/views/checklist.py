@@ -8,14 +8,14 @@ from pyramid.httpexceptions import HTTPFound
 from paildocket.i18n import _
 from paildocket.models import Checklist
 from paildocket.security import ViewPermission
-from paildocket.traversal import ChecklistsResource, ChecklistResource
+from paildocket.traversal import ChecklistCollectionResource, ChecklistResource
 
 
 logger = logging.getLogger(__name__)
 
 
-@view_defaults(context=ChecklistsResource, permission=ViewPermission)
-class ChecklistsViews(object):
+@view_defaults(context=ChecklistCollectionResource, permission=ViewPermission)
+class ChecklistCollectionViews(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request

@@ -18,14 +18,14 @@ class RootResource(object):
 
     def __getitem__(self, key):
         if key == 'user':
-            return UsersResource(self)
+            return UserCollectionResource(self)
         elif key == 'list':
-            return ChecklistsResource(self)
+            return ChecklistCollectionResource(self)
         else:
             raise KeyError(key)
 
 
-class ChecklistsResource(object):
+class ChecklistCollectionResource(object):
     __name__ = 'list'
     __parent__ = None
     __acl__ = [
@@ -74,7 +74,7 @@ class ChecklistResource(object):
         return q.first()
 
 
-class UsersResource(object):
+class UserCollectionResource(object):
     __name__ = 'user'
     __parent__ = None
     __acl__ = [

@@ -1,8 +1,8 @@
 import pytest
 
 from paildocket.traversal import (
-    RootResource, UsersResource, UserResource, ChecklistsResource,
-    ChecklistResource
+    RootResource, UserCollectionResource, UserResource,
+    ChecklistCollectionResource, ChecklistResource
 )
 from paildocket.tests.support import ENCODED_USERID, UUID_USERID
 
@@ -16,17 +16,17 @@ def root_resource_factory():
 
 
 def checklists_resource_factory():
-    return ChecklistsResource(root_resource_factory())
+    return ChecklistCollectionResource(root_resource_factory())
 
 
 def users_resource_factory():
-    return UsersResource(root_resource_factory())
+    return UserCollectionResource(root_resource_factory())
 
 
 @pytest.mark.parametrize(
     'resource_factory,key,classinfo', [
-        (root_resource_factory, 'user', UsersResource),
-        (root_resource_factory, 'list', ChecklistsResource),
+        (root_resource_factory, 'user', UserCollectionResource),
+        (root_resource_factory, 'list', ChecklistCollectionResource),
         (checklists_resource_factory, '123', ChecklistResource),
         (users_resource_factory, ENCODED_USERID, UserResource),
     ]
@@ -74,11 +74,11 @@ def test_users_resource_userid_child():
 # Integration tests
 @pytest.mark.parametrize(
     'path,resource_type,view_name', [
-        (['user'], UsersResource, ''),
-        (['user', 'login'], UsersResource, 'login'),
-        (['user', 'logout'], UsersResource, 'logout'),
-        (['user', 'register'], UsersResource, 'register'),
-        (['list'], ChecklistsResource, ''),
+        (['user'], UserCollectionResource, ''),
+        (['user', 'login'], UserCollectionResource, 'login'),
+        (['user', 'logout'], UserCollectionResource, 'logout'),
+        (['user', 'register'], UserCollectionResource, 'register'),
+        (['list'], ChecklistCollectionResource, ''),
         (['list', '123'], ChecklistResource, ''),
     ]
 )
