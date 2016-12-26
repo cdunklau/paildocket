@@ -123,8 +123,7 @@ class LoginView(object):
         Create and save an auth ticket and return the headers needed
         to set the auth cookie.
         """
-        principal = user.email
-        headers = remember(self.request, principal)
+        headers = remember(self.request, str(user.id))
         return headers
 
 

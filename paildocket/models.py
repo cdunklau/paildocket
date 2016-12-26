@@ -84,6 +84,10 @@ class User(Base):
     @classmethod
     def from_encoded_userid(cls, db_session, encoded_userid):
         userid = encoded_userid_to_userid(encoded_userid)
+        return cls.from_userid(db_session, userid)
+
+    @classmethod
+    def from_userid(cls, db_session, userid):
         return db_session.query(cls).filter(cls.id == userid).first()
 
     @classmethod

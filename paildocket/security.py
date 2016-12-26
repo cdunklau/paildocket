@@ -14,6 +14,7 @@ import logging
 from os import urandom
 
 from pyramid.authorization import ACLAuthorizationPolicy
+from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.interfaces import IAuthenticationPolicy
 from pyramid.security import Everyone, Authenticated
 from pyramid.settings import asbool
@@ -252,6 +253,18 @@ class PaildocketAuthenticationPolicy(object):
                 return self.remember(request, principal)
 
 
+def _get_principals(userid, request):
+    user = User.from_userid(request.db_session, userid)
+    if user is None:
+        return None
+    principals = [Authenticated]
+    if user.admin:
+        principals.append(Administrator)
+    principals.append(user.principal)
+    return principals
+
+
+
 MINUTE = 60
 HOUR = 60 * MINUTE
 DAY = 24 * HOUR
@@ -266,8 +279,9 @@ def includeme(config):
 
     _auth_debug = asbool(
         config.registry.settings.get('paildocket.authentication.debug', False))
-    _authn_policy = PaildocketAuthenticationPolicy(
+    _authn_policy = AuthTktAuthenticationPolicy(
         secret=config.registry.settings['paildocket.authentication.secret'],
+        callback=_get_principals,
         timeout=14 * DAY,
         reissue_time=1 * DAY,
         max_age=30 * DAY,
