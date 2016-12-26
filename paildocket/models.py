@@ -6,7 +6,6 @@ Glossary:
     The userid encoded with ``base64.urlsafe_b64decode``, with padding
     removed, as a string with length 22.
 """
-import datetime
 import logging
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from uuid import UUID
@@ -14,7 +13,7 @@ from uuid import UUID
 
 from sqlalchemy import (
     Column, UniqueConstraint, CheckConstraint,
-    Integer, String, Boolean, DateTime, ForeignKey,
+    Integer, String, Boolean, ForeignKey,
     or_, and_, not_, text,
     engine_from_config
 )
@@ -100,26 +99,6 @@ class User(Base):
         """
         q = db_session.query(cls)
         q = q.filter(or_(User.username == identity, User.email == identity))
-        return q.first()
-
-
-class UserTicket(Base):
-    __tablename__ = 'user_tickets'
-
-    id = Column(Integer, primary_key=True)
-    ticket = Column(String, nullable=False)
-    user_id = Column(ForeignKey('users.id'), nullable=False)
-    remote_address = Column(String)
-    created = Column(
-        DateTime,
-        nullable=False, default=datetime.datetime.utcnow
-    )
-    tickets = relationship('User', lazy='joined', backref='tickets')
-
-    @classmethod
-    def find_ticket_with_principal(cls, db_session, ticket, principal):
-        q = db_session.query(cls).join(User, User.id == cls.user_id)
-        q = q.filter(and_(cls.ticket == ticket, User.email == principal))
         return q.first()
 
 

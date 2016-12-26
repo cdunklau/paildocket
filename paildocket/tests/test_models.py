@@ -113,37 +113,6 @@ class TestUserModel(object):
         assert alice is by_email
 
 
-class TestUserTicket(object):
-    def _create_user_and_ticket(self, db_session, ticket):
-        from paildocket.models import User, UserTicket
-
-        alice = User(
-            username=ALICE, password_hash=ALICE_HASH, email=ALICE_EMAIL)
-        db_session.add(alice)
-        db_session.flush()
-        alice_ticket = UserTicket(ticket=ticket)
-        alice.tickets.append(alice_ticket)
-        db_session.flush()
-        return alice, alice_ticket
-
-    def test_created_timestamp(self, db_session):
-        import datetime
-
-        epsilon = datetime.timedelta(seconds=1)
-        now = datetime.datetime.utcnow()
-        alice, alice_ticket = self._create_user_and_ticket(db_session, '')
-        assert abs(now - alice_ticket.created) < epsilon
-
-    def test_find_ticket_with_principal(self, db_session):
-        from paildocket.models import UserTicket
-
-        ticket = 'abcdefg12'
-        alice, alice_ticket = self._create_user_and_ticket(db_session, ticket)
-        found_ticket_instance = UserTicket.find_ticket_with_principal(
-            db_session, ticket, alice.email)
-        assert found_ticket_instance is alice_ticket
-
-
 @pytest.mark.parametrize(
     'input,expected',
     [
