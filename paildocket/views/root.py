@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 from pyramid.traversal import find_root
 from sqlalchemy import or_
 
+from paildocket.views import BaseView
 from paildocket.i18n import _
 from paildocket.models import User
 from paildocket.schemas import LoginSchema, RegisterUserSchema
@@ -30,11 +31,7 @@ def forbidden(request):
 
 
 @view_defaults(context=RootResource)
-class RootViews(object):
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
+class RootViews(BaseView):
     @view_config(renderer='index.jinja2')
     def index(self):
         return {'project': 'paildocket'}
@@ -56,17 +53,16 @@ class RootViews(object):
 
 
 @view_defaults(name='login', renderer='login.jinja2', context=RootResource)
-class LoginView(object):
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class LoginView(BaseView):
+    def _extra_init(self):
         self.form = deform.Form(
             LoginSchema(),
-            action=request.resource_url(context, request.view_name),
+            action=self.request.resource_url(
+                self.context, self.request.view_name),
             buttons=(deform.Button('submit', title=_('Log In')),),
             formid='login_form',
         )
-        self.password_context = request.registry['password_context']
+        self.password_context = self.request.registry['password_context']
 
     @view_config(request_method='GET')
     def display(self):
@@ -132,14 +128,12 @@ class LoginView(object):
     renderer='register.jinja2',
     context=RootResource,
 )
-class RegisterView(object):
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class RegisterView(BaseView):
+    def _extra_init(self):
         schema = RegisterUserSchema()
         self.form = deform.Form(
             schema,
-            action=request.resource_url(self.context, 'register'),
+            action=self.request.resource_url(self.context, 'register'),
             buttons=(deform.Button('submit', title=_('Register')),),
             formid='register_form'
         )

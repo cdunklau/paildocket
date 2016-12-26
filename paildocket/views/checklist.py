@@ -4,6 +4,7 @@ import deform
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from paildocket.views import BaseView
 from paildocket.i18n import _
 from paildocket.models import Checklist
 from paildocket.schemas import ChecklistSchema
@@ -15,11 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 @view_defaults(context=ChecklistCollectionResource, permission=ViewPermission)
-class ChecklistCollectionViews(object):
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
+class ChecklistCollectionViews(BaseView):
     @view_config(renderer='checklist/index.jinja2')
     def index(self):
         db_session = self.request.db_session
@@ -33,13 +30,11 @@ class ChecklistCollectionViews(object):
 
 
 @view_defaults(context=ChecklistCollectionResource, permission=ViewPermission)
-class ChecklistCreateViews(object):
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class ChecklistCreateViews(BaseView):
+    def _extra_init(self):
         self.form = deform.Form(
             ChecklistSchema(),
-            action=request.resource_url(context, request.view_name),
+            action=self.request.resource_url(context, self.request.view_name),
             buttons=(deform.Button('submit', title=_('Create')),),
             formid='checklist_form',
         )
@@ -72,11 +67,7 @@ class ChecklistCreateViews(object):
 
 
 @view_defaults(context=ChecklistResource, permission=ViewPermission)
-class ChecklistView(object):
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
+class ChecklistView(BaseView):
     @view_config(renderer='json')
     def index(self):
         checklist = self.context.checklist
